@@ -1,0 +1,83 @@
+<!doctype html>
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+  lang="en"
+>
+  <head>
+    <title>Case List</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- <link
+        type="text/css"
+        rel="stylesheet"
+        href="/css/bootstrap.min.css"
+        th:href="@{/css/bootstrap.min.css}"
+      /> -->
+  </head>
+  <body>
+    <h1>Case List</h1>
+    <!-- <h1>Hello <span sec:authentication="name"></span>!</h1> -->
+
+    <table border="1" class="table table-striped">
+      <thead>
+        <tr>
+          <th>Case Number</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Case Type</th>
+           <th>Client</th>
+          <th>Delete</th>
+          <th>Edit</th>
+          <!-- <th colspan="2"></th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="caseVari : ${clientcaseRepo}">
+          <td th:text="${caseVari.caseNumber}"></td>
+          <td th:text="${caseVari.title}"></td>
+          <td th:text="${caseVari.description}"></td>
+           <td th:text="${caseVari.type.caseType}"></td>
+
+          <!-- <td>
+           <form th:action="@{/updateDate}" method="post" th:object="${caseVari}">
+               <input type="hidden" th:field="*{id}" />
+              <input type="date" th:field="*{courtDate}" />
+               <input type="submit" value="Save" />
+             </form>
+                </td> -->
+          <td>
+            <a
+              th:href="@{/deletebyname/{caseNumber}(caseNumber=${caseVari.caseNumber})}"
+              class="btn btn-danger"
+              >Delete</a
+            >
+          </td>
+
+          <td>
+            <a
+              th:href="@{/deletebyname/{caseNumber}(caseNumber=${caseVari.caseNumber})}"
+              class="btn btn-danger"
+              >Edit</a
+            >
+          </td>
+
+          <!-- <td  sec:authorize="hasAuthority('ADMIN')"> -->
+
+          <!-- <td> -->
+          <!-- <a th:href="@{/edit/{id}(id=${book.id})}">Edit</a> -->
+          <!-- </td> -->
+        </tr>
+      </tbody>
+    </table>
+
+    <a href="/addcase" class="btn btn-success">ADD A CASE</a>
+    <!-- <a th:href="@{/deletebyname/{caseNumber}(caseNumber=${caseVari.caseNumber})}" class="btn btn-danger"
+                >Delete</a> -->
+    <!-- <div style="margin-top: 30px">
+        <form th:action="@{/logout}" method="post" style="margin-bottom: 20px">
+          <input type="submit" value="Sign Out" />
+        </form>
+      </div> -->
+  </body>
+</html>
