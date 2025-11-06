@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
 @Entity
@@ -21,10 +22,11 @@ public class ClientCase {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long caseId;
 
+  @Column(unique = true)      // this is added becase the cases are deleted using casenumbe than the ID. so it is unique.
   private String caseNumber;
   private String title;
   private String description;
-  private LocalDate courtDate;
+  private LocalDate courtDate;    // court date is not yet addded.
 
   // have to add client to here .
   @ManyToMany

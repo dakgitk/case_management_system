@@ -22,10 +22,17 @@ public class client {
   private String email;
   private String Address;
 
-//clientcase should be here
-@ManyToMany(mappedBy ="clients",cascade = CascadeType.ALL)
-private Set<ClientCase> ClientCases = new HashSet<ClientCase>();
+  // clientcase should be here
+  @ManyToMany(mappedBy = "clients", cascade = CascadeType.ALL)
+  private Set<ClientCase> ClientCases = new HashSet<ClientCase>();
 
+  public Set<ClientCase> getClientCases() {
+    return ClientCases;
+  }
+
+  public void setClientCases(Set<ClientCase> clientCases) {
+    ClientCases = clientCases;
+  }
 
   public client(String firstName, String lastName, String email, String address) {
     this.firstName = firstName;
@@ -34,7 +41,7 @@ private Set<ClientCase> ClientCases = new HashSet<ClientCase>();
     Address = address;
   }
 
-  public client(){
+  public client() {
 
   }
 

@@ -46,7 +46,16 @@
                <input type="submit" value="Save" />
              </form>
                 </td> -->
-          <td>
+                <!-- the first delete link should be changed so the client can be added. -->
+          <td>        
+            <a
+              th:href="@{/deletebyname/{caseNumber}(caseNumber=${caseVari.caseNumber})}"
+              class="btn btn-danger"
+              >Delete</a
+            >
+          </td>
+          <!--  -->
+             <td>
             <a
               th:href="@{/deletebyname/{caseNumber}(caseNumber=${caseVari.caseNumber})}"
               class="btn btn-danger"
@@ -56,7 +65,7 @@
 
           <td>
             <a
-              th:href="@{/deletebyname/{caseNumber}(caseNumber=${caseVari.caseNumber})}"
+              th:href="@{/edit/{id}(id=${caseVari.caseId})}"
               class="btn btn-danger"
               >Edit</a
             >

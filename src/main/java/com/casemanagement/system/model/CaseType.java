@@ -18,6 +18,10 @@ public class CaseType {         // this class is to show what type of a leagl ma
   private Long typeid;
   private String caseType;  
 
+  
+
+
+
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "type")
   private List<ClientCase> clientcases;
 

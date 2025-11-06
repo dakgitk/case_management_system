@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>EDIT CASE</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Edit Case</h1>
+	<div>
+		<form th:object="${caseVariable}" th:action="@{/save}"  method="post">
+
+			<input type="hidden" id="id" th:field="*{caseId}" />
+		  	<label for="caseNumber">Case Number</label>
+			<input type="text" id="caseNumber" th:field="*{caseNumber}" />
+
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="title">Title</label>
+			<input type="text" id="title" th:field="*{title}" />
+
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="description">Description</label>
+			<input type="text" id="description" th:field="*{description}" />
+
+      <!--  ///////////////////////////////////////// -->
+			<div style="clear: both; display: block; height: 10px;"></div>			
+
+		  	<label for="type">Case Type</label>
+
+			 <select id="type" th:field="*{type}" class="form-control">
+       			<option th:each="type: ${typeVaribales}"
+                    th:value="${type.typeid}" 
+                   th:text="${type.caseType}">
+            </option>
+    		</select>
+        
+			
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="submit" value="Save"></input>
+		</form>
+	</div>
+</body>
+</html>
