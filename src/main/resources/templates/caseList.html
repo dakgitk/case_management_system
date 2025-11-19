@@ -17,7 +17,9 @@
   </head>
   <body>
     <h1>Case List</h1>
-    <!-- <h1>Hello <span sec:authentication="name"></span>!</h1> -->
+
+    <h1>Hello <span sec:authentication="name"></span>!</h1>
+    <h2>Welcome to Your Case List</h2>
 
     <table border="1" class="table table-striped">
       <thead>
@@ -27,6 +29,7 @@
           <th>Description</th>
           <th>Case Type</th>
            <th>Client</th>
+           <th>Court Date</th>
           <th>Delete</th>
           <th>Edit</th>
           <!-- <th colspan="2"></th> -->
@@ -38,30 +41,38 @@
           <td th:text="${caseVari.title}"></td>
           <td th:text="${caseVari.description}"></td>
            <td th:text="${caseVari.type.caseType}"></td>
+          <td>
+             <ul>
+                
+             <a th:href="@{/case/{caseNumber}/clients(caseNumber=${caseVari.caseNumber})}"
+                  class="btn btn-info"><li th:each="cli : ${caseVari.clients}" 
+                    th:text="${cli.firstName + ' ' + cli.lastName}">  </li> </a>  
+             </ul>
+           </td>
 
-          <!-- <td>
-           <form th:action="@{/updateDate}" method="post" th:object="${caseVari}">
-               <input type="hidden" th:field="*{id}" />
-              <input type="date" th:field="*{courtDate}" />
+          <td>
+           <form th:action="@{/updateDate}" method="post" >
+               <input type="hidden" name="caseId" th:value="*{caseVari.caseId}" />
+              <input type="date" name="courtDate" th:value="*{caseVari.courtDate}" />
                <input type="submit" value="Save" />
              </form>
-                </td> -->
+                </td>
                 <!-- the first delete link should be changed so the client can be added. -->
-          <td>        
+          <td >        
             <a
               th:href="@{/deletebyname/{caseNumber}(caseNumber=${caseVari.caseNumber})}"
               class="btn btn-danger"
-              >Delete</a
-            >
+              sec:authorize="hasAuthority('ADMIN')"
+              >Delete</a>
           </td>
           <!--  -->
-             <td>
+             <!-- <td>
             <a
               th:href="@{/deletebyname/{caseNumber}(caseNumber=${caseVari.caseNumber})}"
               class="btn btn-danger"
               >Delete</a
             >
-          </td>
+          </td> -->
 
           <td>
             <a
@@ -80,13 +91,16 @@
       </tbody>
     </table>
 
-    <a href="/addcase" class="btn btn-success">ADD A CASE</a>
+     <div style="margin-top: 30px">
+       <a href="/addcase" class="btn btn-success">ADD A CASE</a>
+     </div>
+   
     <!-- <a th:href="@{/deletebyname/{caseNumber}(caseNumber=${caseVari.caseNumber})}" class="btn btn-danger"
                 >Delete</a> -->
-    <!-- <div style="margin-top: 30px">
+    <div style="margin-top: 30px">
         <form th:action="@{/logout}" method="post" style="margin-bottom: 20px">
           <input type="submit" value="Sign Out" />
         </form>
-      </div> -->
+      </div>
   </body>
 </html>

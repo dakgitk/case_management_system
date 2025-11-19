@@ -1,0 +1,79 @@
+<!doctype html>
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+  lang="en"
+>
+  <head>
+    <title>Cient Details</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+  </head>
+  <body>
+    <h1>Cient Details</h1>
+    <!-- <h1>Hello <span sec:authentication="name"></span>!</h1> -->
+
+    <table border="1" class="table table-striped">
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Address</th>
+           
+          <!-- <th colspan="2"></th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="clientdetail : ${clients}">
+          <td th:text="${clientdetail.firstName}"></td>
+          <td th:text="${clientdetail.lastName}"></td>
+          <td th:text="${clientdetail.email}"></td>
+           <td th:text="${clientdetail.Address}"></td>
+          
+
+          <!-- <td>
+           <form th:action="@{/updateDate}" method="post" th:object="${caseVari}">
+               <input type="hidden" th:field="*{id}" />
+              <input type="date" th:field="*{courtDate}" />
+               <input type="submit" value="Save" />
+             </form>
+                </td> -->
+                <!-- the first delete link should be changed so the client can be added. -->
+          <!-- <td>        
+            <a
+              th:href="@{/deletebyname/{caseNumber}(caseNumber=${caseVari.caseNumber})}"
+              class="btn btn-danger"
+              >Delete</a>
+          </td> -->
+          <!--  -->
+             <!-- <td>
+            <a
+              th:href="@{/deletebyname/{caseNumber}(caseNumber=${caseVari.caseNumber})}"
+              class="btn btn-danger"
+              >Delete</a
+            >
+          </td> -->
+
+          <!-- <td>
+            <a
+              th:href="@{/edit/{id}(id=${caseVari.caseId})}"
+              class="btn btn-danger"
+              >Edit</a
+            >
+          </td> -->
+
+        
+        </tr>
+      </tbody>
+    </table>
+     <a href="/caselist" class="btn btn-secondary">Back to Cases</a>
+       <div style="margin-top: 30px">
+        <form th:action="@{/logout}" method="post" style="margin-bottom: 20px">
+          <input type="submit" value="Sign Out" />
+        </form>
+      </div>
+  
+  </body>
+</html>

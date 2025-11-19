@@ -10,6 +10,9 @@ import org.springframework.context.annotation.Bean;
 import com.casemanagement.system.model.ClientCase;
 import com.casemanagement.system.model.ClientCaseRepository;
 import com.casemanagement.system.model.ClientRepository;
+import com.casemanagement.system.model.client;
+import com.casemanagement.system.model.AppUser;
+import com.casemanagement.system.model.AppUserRepository;
 import com.casemanagement.system.model.CaseType;
 import com.casemanagement.system.model.CaseTypeRepository;
 
@@ -22,7 +25,7 @@ public class SystemApplication {
 
 	@Bean
 	public CommandLineRunner demo(ClientCaseRepository clientcaseRepos, ClientRepository clientRepos,
-			CaseTypeRepository CasetypeRepos) {
+			CaseTypeRepository CasetypeRepos,AppUserRepository appUserRepos) {
 
 		return args -> {
 
@@ -33,24 +36,47 @@ public class SystemApplication {
 			CasetypeRepos.save(type2);
 			CasetypeRepos.save(type3);
 
-			clientcaseRepos.save(new ClientCase("AAA5", "Tax Liability", "this is a case about unpaid taxes", type1));
+			// Demo Clients
+			client james = new client("James", "Hector", "jhector@gmail.com", "street 3, Westwood");
+			client sarah = new client("Sarah", "Connor", "sconnor@yahoo.com", "45 Oak Ave, Eastville");
+			client david = new client("David", "Kim", "dkim@outlook.com", "21 Elm St, Northport");
+			client maria = new client("Maria", "Rodriguez", "mrodriguez@company.net", "10 Cedar Blvd, South Heights");
+
+			clientRepos.save(james);
+			clientRepos.save(sarah);
+			clientRepos.save(david);
+			clientRepos.save(maria);
+
+			// Case 1: Tax Liability
+			ClientCase case1 = new ClientCase("AAA5", "Tax Liability", "Unpaid taxes", type1);
 
 			// Case 2: Legal Dispute
-			clientcaseRepos.save(
-					new ClientCase("BCD9", "Contract Dispute",
-							"Litigation involving a breach of sales contract between two parties.", type2));
+			ClientCase case2 = new ClientCase("BCD9", "Contract Dispute", "Litigation over sales contract", type2);
 
 			// Case 3: Intellectual Property
-			clientcaseRepos.save(
-					new ClientCase("PQR3", "Patent Infringement",
-							"A case filed to protect intellectual property rights against an unauthorized user.", type3));
+			ClientCase case3 = new ClientCase("PQR3", "Patent Infringement", "Intellectual property case", type3);
 
 			// Case 4: Real Estate
-			clientcaseRepos.save(
-					new ClientCase("XYZ1", "Property Settlement",
-							"Handling the division and sale of a shared commercial property.", type1));
+			ClientCase case4 = new ClientCase("XYZ1", "Property Settlement", "Shared property dispute", type1);
 
-		
+			// Link clients to cases
+			case1.getClients().add(james);
+			case2.getClients().add(sarah);
+			case3.getClients().add(david);
+			case4.getClients().add(maria);
+
+			// Save cases
+			clientcaseRepos.save(case1);
+			clientcaseRepos.save(case2);
+			clientcaseRepos.save(case3);
+			clientcaseRepos.save(case4);
+
+
+			AppUser admin = new AppUser("admin","$2a$12$DyMJVMms3JlzvjT2twvn4ukOIsC0TzwBQioIec33fEfhBS0hs5kOu","ADMIN");
+			AppUser user1 = new AppUser("user1","$2a$08$aPk/9PFzHS9ymhKuO6bFhONKYVC0IGEHwmIDT83gxzYK2kKcekKpu","USER");
+			appUserRepos.save(admin);
+			appUserRepos.save(user1);
+			
 
 		};
 	}
