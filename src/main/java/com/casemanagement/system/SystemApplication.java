@@ -72,7 +72,7 @@ public class SystemApplication {
 			clientcaseRepos.save(case4);
 
 
-			AppUser admin = new AppUser("admin","$2a$12$DyMJVMms3JlzvjT2twvn4ukOIsC0TzwBQioIec33fEfhBS0hs5kOu","ADMIN");
+			AppUser admin = new AppUser("admin","$2a$12$DyMJVMms3JlzvjT2twvn4ukOIsC0TzwBQioIec33fEfhBS0hs5kOu","ADMIN");//admin
 			AppUser user1 = new AppUser("user1","$2a$08$aPk/9PFzHS9ymhKuO6bFhONKYVC0IGEHwmIDT83gxzYK2kKcekKpu","USER");
 			appUserRepos.save(admin);
 			appUserRepos.save(user1);
